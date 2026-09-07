@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --paper: #efe9dd;
+    --paper-raised: #f8f4eb;
+    --ink: #17150f;
+    --rule: rgba(23, 21, 15, 0.16);
+    --rule-strong: rgba(23, 21, 15, 0.4);
+    --vermilion: #bf3b21;
+    --line-height-ruled: 28px;
+  }
+
+  * {
+    border-color: var(--rule);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-feature-settings: "kern" 1, "liga" 1;
+    /* Paper grain */
+    background-image:
+      radial-gradient(circle at 12% 8%, rgba(191, 59, 33, 0.05), transparent 42%),
+      radial-gradient(circle at 88% 0%, rgba(44, 90, 76, 0.06), transparent 38%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background: var(--vermilion);
+    color: #f8f4eb;
+  }
+
+  ::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgba(23, 21, 15, 0.05);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(23, 21, 15, 0.28);
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(23, 21, 15, 0.5);
+    background-clip: content-box;
+  }
+}
+
+@layer components {
+  /* Small-caps mono label used across the interface */
+  .label-mono {
+    @apply font-mono text-[10px] font-medium uppercase tracking-[0.18em] text-ink-faint;
+  }
+
+  /* The airmail envelope edge */
+  .airmail-edge {
+    background-image: repeating-linear-gradient(
+      45deg,
+      #bf3b21 0 9px,
+      transparent 9px 18px,
+      #17150f 18px 27px,
+      transparent 27px 36px
+    );
+  }
+
+  /* Notebook ruling behind the composer */
+  .ruled-surface {
+    background-color: var(--paper-raised);
+    background-image: linear-gradient(
+      to bottom,
+      transparent calc(var(--line-height-ruled) - 1px),
+      rgba(23, 21, 15, 0.09) calc(var(--line-height-ruled) - 1px),
+      rgba(23, 21, 15, 0.09) var(--line-height-ruled)
+    );
+    background-size: 100% var(--line-height-ruled);
+  }
+
+  /* Dotted leader between a label and its value */
+  .leader {
+    background-image: radial-gradient(circle, rgba(23, 21, 15, 0.32) 1px, transparent 1px);
+    background-size: 5px 5px;
+    background-position: bottom 4px left 0;
+    background-repeat: repeat-x;
+  }
+
+  /* Tear-off perforation */
+  .perforation-y {
+    background-image: radial-gradient(circle, var(--paper) 3.5px, transparent 3.6px),
+      linear-gradient(to bottom, var(--rule-strong) 0 100%);
+    background-size: 100% 14px, 1px 100%;
+    background-position: center top, center top;
+    background-repeat: repeat-y, no-repeat;
+  }
+
+  .perforation-x {
+    background-image: radial-gradient(circle, var(--paper) 3.5px, transparent 3.6px),
+      linear-gradient(to right, var(--rule-strong) 0 100%);
+    background-size: 14px 100%, 100% 1px;
+    background-position: left center, left center;
+    background-repeat: repeat-x, no-repeat;
+  }
+
+  .hatch {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      rgba(23, 21, 15, 0.08) 0 1px,
+      transparent 1px 7px
+    );
+  }
+
+  .focus-ring:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  .shadow-card {
+    box-shadow: 3px 3px 0 rgba(23, 21, 15, 0.08);
+  }
+  .shadow-lift {
+    box-shadow: 5px 5px 0 rgba(23, 21, 15, 0.14);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
